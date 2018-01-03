@@ -9,3 +9,6 @@ if module is AZSMZ EPaper 2.9":
 
 if module is AZSMZ EPaper 2.9" Mini:
 #define AZSMZ_EPAPER_MINI   21  
+
+# where to get
+azsmz.aliexpress.com
