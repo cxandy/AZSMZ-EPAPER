@@ -25,7 +25,7 @@ See more at http://blog.squix.ch
 #include "text.h"
 
 // Config mode SSID
-const String CONFIG_SSID = "ESPaperConfig";
+const String CONFIG_SSID = "AZSMZ-ePaper-Mini";
 
 // Setup
 String WIFI_SSID = "";
@@ -65,8 +65,12 @@ const int UPDATE_INTERVAL_SECS = 20 * 60; // Update every 10 minutes
 #define BUSY 4 // D2
 #define USR_BTN 12 // D6
 
+#define AZSMZ_EPAPER_MINI   21    
 
-   
+#ifdef AZSMZ_EPAPER_MINI
+  #define USR_BTN   5
+#endif
+ 
 // Wunderground Settings
 // To check your settings first try them out in your browser:
 // http://api.wunderground.com/api/WUNDERGROUND_API_KEY/conditions/q/WUNDERGROUND_COUNTTRY/WUNDERGROUND_CITY.json
@@ -107,4 +111,3 @@ bool IS_STYLE_12HR = false;
 /***************************
  * End Settings
  **************************/
-
