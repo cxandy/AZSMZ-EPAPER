@@ -229,7 +229,9 @@ void handleRoot() {
   page += "</select>";
   page += FPSTR(HTTP_WG_LANGUAGES);
   page += "<br/><br/>";
-  page += getFormField("wundergroundkey", "Wunderground API Key", "40", WUNDERGRROUND_API_KEY, "");
+//  page += getFormField("wundergroundkey", "Wunderground API Key", "40", WUNDERGRROUND_API_KEY, "");
+  page += getFormField("wundergroundkey", "Wunderground API Key", "40", WUNDERGRROUND_API_KEY.substring(0,3) + "***"+ WUNDERGRROUND_API_KEY.substring(WUNDERGRROUND_API_KEY.length()-3), "");
+
   page += FPSTR(HTTP_FORM_END);
   page += FPSTR(HTTP_END);
 
@@ -243,7 +245,10 @@ void handleSave() {
   WUNDERGROUND_CITY = server.arg("wundergroundcity");
   WUNDERGROUND_COUNTRY = server.arg("wundergroundstate");
   WUNDERGRROUND_LANGUAGE = server.arg("wundergroundlanguage");
-  WUNDERGRROUND_API_KEY = server.arg("wundergroundkey");
+//  WUNDERGRROUND_API_KEY = server.arg("wundergroundkey");
+  String apiKey = server.arg("wundergroundkey");
+  if (apiKey.length()> 10) WUNDERGRROUND_API_KEY = server.arg("wundergroundkey");
+  
   Serial.println(WIFI_SSID);
   Serial.println(WIFI_PASS);
   Serial.println(WUNDERGROUND_CITY);
@@ -320,7 +325,6 @@ void startConfigPortal(MiniGrafx *gfx) {
     yield();
   }
 }
-
 
 
 
