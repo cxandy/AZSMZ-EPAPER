@@ -1,4 +1,6 @@
-# WeatherStation for the AZSMZ EPaper 2.9" or AZSMZ EPaper 2.9" Mini
+# AZSMZ EPaper 2.9" or AZSMZ EPaper 2.9" Mini
+
+WeatherStation for the AZSMZ EPaper 2.9" or AZSMZ EPaper 2.9" Mini
 
 Please edit setting.h file
 
