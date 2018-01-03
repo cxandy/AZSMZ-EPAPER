@@ -24,6 +24,8 @@ See more at http://blog.squix.ch
 #define LANG 'EN'
 #include "text.h"
 
+#define AZSMZ_EPAPER_MINI   21  
+
 // Config mode SSID
 const String CONFIG_SSID = "AZSMZ-ePaper-Mini";
 
@@ -64,8 +66,6 @@ const int UPDATE_INTERVAL_SECS = 20 * 60; // Update every 10 minutes
 #define DC 5   // D1
 #define BUSY 4 // D2
 #define USR_BTN 12 // D6
-
-#define AZSMZ_EPAPER_MINI   21    
 
 #ifdef AZSMZ_EPAPER_MINI
   #define USR_BTN   5
