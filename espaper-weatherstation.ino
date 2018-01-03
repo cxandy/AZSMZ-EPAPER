@@ -163,6 +163,7 @@ void setup() {
       drawForecast();
       drawAstronomy();
       drawButtons();
+      drawDivLines();
       gfx.commit();
     } else {
       gfx.fillBuffer(MINI_WHITE);
@@ -228,7 +229,19 @@ void updateData() {
         Serial.println(".");
         delay(100);
   }
+}
 
+#ifdef AZSMZ_EPAPER_MINI
+  int Y_Buttons = -2;
+  int Y_Time = SCREEN_HEIGHT - 12;
+#else
+  int Y_Buttons = SCREEN_HEIGHT - 12;
+  int Y_Time = -2;
+#endif
+
+void drawDivLines() {
+  gfx.drawLine(0, SCREEN_HEIGHT - 12, SCREEN_WIDTH, SCREEN_HEIGHT - 12);
+  gfx.drawLine(0, 11, SCREEN_WIDTH, 11);
 }
 
 // draws the clock
@@ -248,13 +261,11 @@ void drawTime() {
   if (IS_STYLE_12HR) {
     int hour = (timeinfo->tm_hour+11)%12+1;  // take care of noon and midnight
     sprintf(time_str, "%2d:%02d:%02d", hour, timeinfo->tm_min, timeinfo->tm_sec);
-    gfx.drawString(2, -2, String(FPSTR(TEXT_UPDATED)) + String(time_str));
+    gfx.drawString(2, Y_Time, String(FPSTR(TEXT_UPDATED)) + String(time_str));
   } else {
     sprintf(time_str, "%02d:%02d:%02d", timeinfo->tm_hour, timeinfo->tm_min, timeinfo->tm_sec);
-    gfx.drawString(2, -2, String(FPSTR(TEXT_UPDATED)) + String(time_str));
+    gfx.drawString(2, Y_Time, String(FPSTR(TEXT_UPDATED)) + String(time_str));
   }
-  gfx.drawLine(0, 11, SCREEN_WIDTH, 11);
-
 }
 
 // draws current weather information
@@ -386,10 +397,10 @@ void drawBattery() {
    gfx.setColor(MINI_BLACK);
    gfx.setFont(ArialMT_Plain_10);
    gfx.setTextAlignment(TEXT_ALIGN_RIGHT);  
-   gfx.drawString(SCREEN_WIDTH - 22, -1, String(power, 2) + "V " + String(percentage) + "%");
-   gfx.drawRect(SCREEN_WIDTH - 22, 0, 19, 10);
-   gfx.fillRect(SCREEN_WIDTH - 2, 2, 2, 6);   
-   gfx.fillRect(SCREEN_WIDTH - 20, 2, 16 * percentage / 100, 6);
+   gfx.drawString(SCREEN_WIDTH - 22, Y_Time + 1, String(power, 2) + "V " + String(percentage) + "%");
+   gfx.drawRect(SCREEN_WIDTH - 22, Y_Time + 2, 19, 10);
+   gfx.fillRect(SCREEN_WIDTH - 2, Y_Time + 4, 2, 6);   
+   gfx.fillRect(SCREEN_WIDTH - 20, Y_Time + 4, 16 * percentage / 100, 6);
 }
 
 // converts the dBm to a range between 0 and 100%
@@ -418,19 +429,17 @@ void drawWifiQuality() {
   }
 }
 
-
 void drawButtons() {
   gfx.setColor(MINI_BLACK);
 
   uint16_t third = SCREEN_WIDTH / 3;
   gfx.setColor(MINI_BLACK);
   //gfx.fillRect(0, SCREEN_HEIGHT - 12, SCREEN_WIDTH, 12);
-  gfx.drawLine(0, SCREEN_HEIGHT - 12, SCREEN_WIDTH, SCREEN_HEIGHT - 12);
-  gfx.drawLine(2 * third, SCREEN_HEIGHT - 12, 2 * third, SCREEN_HEIGHT);
+  gfx.drawLine(2 * third, Y_Buttons, 2 * third, Y_Buttons + 12);
   gfx.setTextAlignment(TEXT_ALIGN_CENTER); 
   gfx.setFont(ArialMT_Plain_10);
-  gfx.drawString(0.5 * third, SCREEN_HEIGHT - 12, FPSTR(TEXT_CONFIG_BUTTON));
-  gfx.drawString(2.5 * third, SCREEN_HEIGHT - 12, FPSTR(TEXT_REFRESH_BUTTON));
+  gfx.drawString(0.5 * third, Y_Buttons, FPSTR(TEXT_CONFIG_BUTTON));
+  gfx.drawString(2.5 * third, Y_Buttons, FPSTR(TEXT_REFRESH_BUTTON));
 }
 
 String getMeteoconIcon(String iconText) {
@@ -476,5 +485,4 @@ String getMeteoconIcon(String iconText) {
 
   return ")";
 }
-
 
