@@ -12,3 +12,9 @@ if module is AZSMZ EPaper 2.9" Mini:
 
 # where to get
 http://azsmz.aliexpress.com
+
+# Install Instructions
+https://github.com/cxandy/espaper-weatherstation/wiki/Install-Instructions
+
+
+
