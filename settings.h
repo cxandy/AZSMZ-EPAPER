@@ -27,7 +27,7 @@ See more at http://blog.squix.ch
 #define AZSMZ_EPAPER_MINI   21  
 
 // Config mode SSID
-const String CONFIG_SSID = "AZSMZ-ePaper-Mini";
+const String CONFIG_SSID = "@AZSMZ-ePaper";
 
 // Setup
 String WIFI_SSID = "";
