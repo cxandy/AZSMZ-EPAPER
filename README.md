@@ -16,5 +16,10 @@ http://azsmz.aliexpress.com
 # Install Instructions
 https://github.com/cxandy/espaper-weatherstation/wiki/Install-Instructions
 
+# web config Instructions
+
 ![Setup 1](resources/setup-1.jpg)
+![Setup 2](resources/setup-2.jpg)
+![Setup 3](resources/setup-3.jpg)
+![Setup 4](resources/setup-4.jpg)
 
