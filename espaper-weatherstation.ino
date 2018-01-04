@@ -29,9 +29,6 @@ See more at https://blog.squix.org
 #include <ESP8266WiFi.h>
 #include "WeatherStationFonts.h"
 
-
-
-
 /***
  * Install the following libraries through Arduino Library Manager
  * - Mini Grafx by Daniel Eichhorn
@@ -48,19 +45,14 @@ See more at https://blog.squix.org
 #include <MiniGrafx.h>
 #include <EPD_WaveShare.h>
 
-
-
 #include "ArialRounded.h"
 #include <MiniGrafxFonts.h>
 #include "moonphases.h"
 #include "weathericons.h"
 #include "configportal.h"
 
-
-
 #define MINI_BLACK 0
 #define MINI_WHITE 1
-
 
 #define MAX_FORECASTS 12
 
@@ -72,7 +64,6 @@ uint16_t palette[] = {ILI9341_BLACK, // 0
 #define SCREEN_HEIGHT 128
 #define SCREEN_WIDTH 296
 #define BITS_PER_PIXEL 1
-
 
 EPD_WaveShare epd(EPD2_9, CS, RST, DC, BUSY);
 MiniGrafx gfx = MiniGrafx(&epd, BITS_PER_PIXEL, palette);
@@ -99,7 +90,6 @@ String getMeteoconIcon(String iconText);
 const char* getMeteoconIconFromProgmem(String iconText);
 const char* getMiniMeteoconIconFromProgmem(String iconText);
 void drawForecast();
-
 
 long lastDownloadUpdate = millis();
 
@@ -150,7 +140,7 @@ void setup() {
   Serial.println("State: " + String(btnState));
   if (btnState == LOW) {
     boolean connected = connectWifi();
-    startConfigPortal(&gfx);
+    startConfig();
   } else {
     boolean connected = connectWifi();
     if (connected) {
@@ -177,7 +167,6 @@ void setup() {
   }
 }
 
-
 void loop() {
 
   
@@ -198,8 +187,6 @@ void updateData() {
   
   //gfx.fillBuffer(MINI_BLACK);
   gfx.setFont(ArialRoundedMTBold_14);
-
-  
 
   WundergroundConditions *conditionsClient = new WundergroundConditions(IS_METRIC);
   conditionsClient->updateConditions(&conditions, WUNDERGRROUND_API_KEY, WUNDERGRROUND_LANGUAGE, WUNDERGROUND_COUNTRY, WUNDERGROUND_CITY);
@@ -244,20 +231,71 @@ void drawDivLines() {
   gfx.drawLine(0, 11, SCREEN_WIDTH, 11);
 }
 
+#include <ESP8266HTTPUpdateServer.h>
+ESP8266HTTPUpdateServer httpUpdater;
+
+void startConfig() {
+  server.on ( "/", handleRoot );
+  server.on ( "/save", handleSave);
+  server.on ( "/reset", []() {
+     saveConfig();
+     ESP.restart();
+  } );
+  server.onNotFound ( handleNotFound );
+  
+  httpUpdater.setup(&server);  
+  server.begin();
+
+  boolean connected = WiFi.status() == WL_CONNECTED;
+
+  gfx.fillBuffer(1);
+  gfx.setColor(0);
+  gfx.setTextAlignment(TEXT_ALIGN_CENTER);
+  gfx.setFont(ArialMT_Plain_16);
+  
+  if (connected) {
+      Serial.println ( "Open browser at http://" + WiFi.localIP().toString());
+
+      gfx.drawString(296 / 2, 10, "AZSMZ ePaper Setup Mode\nConnected to: " + WiFi.SSID() + "\nOpen browser at\nhttp://" + WiFi.localIP().toString());
+      
+  } else {
+      WiFi.mode(WIFI_AP);
+      WiFi.softAP((ESP.getChipId()+CONFIG_SSID).c_str());
+      IPAddress myIP = WiFi.softAPIP();  
+      Serial.println(myIP);
+      gfx.drawString(296 / 2, 10, "AZSMZ ePaper Setup Mode\nConnect WiFi to:\n" + String(ESP.getChipId()) + CONFIG_SSID + "\nOpen browser at\nhttp://" + myIP.toString());
+  }
+
+  gfx.commit();
+
+  Serial.println ( "HTTP server started" );
+
+  long startTime = millis();
+  while(millis()-startTime< 300 * 1000) {  
+    server.handleClient();
+    yield();
+  }
+
+  gfx.fillBuffer(1);
+  drawButtons();
+  drawDivLines();
+  gfx.setFont(ArialMT_Plain_16);  
+  gfx.drawString(296 / 2, 128 / 2 - 30, "\nPress LEFT + RIGHT button\nRelease RIGHT button first\nto enter config mode");
+  gfx.commit();
+  ESP.deepSleep(UPDATE_INTERVAL_SECS * 1000000);
+}
+
 // draws the clock
 void drawTime() {
-
   char *dstAbbrev;
   char time_str[30];
   time_t now = dstAdjusted.time(&dstAbbrev);
   struct tm * timeinfo = localtime (&now);
-
   gfx.setTextAlignment(TEXT_ALIGN_LEFT);
   gfx.setFont(ArialMT_Plain_10);
   gfx.setColor(MINI_BLACK);
   String date = ctime(&now);
   date = date.substring(0,11) + String(1900 + timeinfo->tm_year);
-
   if (IS_STYLE_12HR) {
     int hour = (timeinfo->tm_hour+11)%12+1;  // take care of noon and midnight
     sprintf(time_str, "%2d:%02d:%02d", hour, timeinfo->tm_min, timeinfo->tm_sec);
@@ -278,29 +316,22 @@ void drawCurrentWeather() {
   String weatherIcon = getMeteoconIcon(conditions.weatherIcon);
   gfx.drawString(5, 20, weatherIcon);
   // Weather Text
-
   gfx.setColor(MINI_BLACK);
   gfx.setFont(ArialMT_Plain_10);
   gfx.setTextAlignment(TEXT_ALIGN_LEFT);
   gfx.drawString(55, 15, DISPLAYED_CITY_NAME);
-
   gfx.setFont(ArialMT_Plain_24);
   gfx.setTextAlignment(TEXT_ALIGN_LEFT);
   String degreeSign = "°F";
   if (IS_METRIC) {
     degreeSign = "°C";
   }
-
-  String temp = conditions.currentTemp + degreeSign;
-      
+  String temp = conditions.currentTemp + degreeSign;    
   gfx.drawString(55, 25, temp);
-
   gfx.setFont(ArialMT_Plain_10);
   gfx.setTextAlignment(TEXT_ALIGN_LEFT);
   gfx.drawString(55, 50, conditions.weatherText);
   gfx.drawLine(0, 65, SCREEN_WIDTH, 65);
-  
-
 }
 
 void drawForecast() {
@@ -312,23 +343,18 @@ void drawForecast() {
 
 // helper for the forecast columns
 void drawForecastDetail(uint16_t x, uint16_t y, uint8_t index) {
-
   gfx.setFont(ArialMT_Plain_10);
   gfx.setTextAlignment(TEXT_ALIGN_CENTER);
   String hour = hourlies[index].hour;
   hour.toUpperCase();
   gfx.drawString(x + 25, y - 2, hour);
-
   gfx.setColor(MINI_BLACK);
-  gfx.drawString(x + 25, y + 12, hourlies[index].temp + "° " + hourlies[index].PoP + "%");
-  
+  gfx.drawString(x + 25, y + 12, hourlies[index].temp + "° " + hourlies[index].PoP + "%"); 
   gfx.setFont(Meteocons_Plain_21);
   String weatherIcon = getMeteoconIcon(hourlies[index].icon);
   gfx.drawString(x + 25, y + 24, weatherIcon);
   gfx.drawLine(x + 2, 12, x + 2, 65);
   gfx.drawLine(x + 2, 25, x + 43, 25);
-
-
 }
 
 // draw moonphase and sunrise/set and moonrise/set
@@ -385,11 +411,9 @@ void drawLabelValue(uint8_t line, String label, String value) {
   gfx.drawString(valueX, 30 + line * 15, value);
 }
 
-
-
 void drawBattery() {
    uint8_t percentage = 100;
-   float power = analogRead(A0) * 4.2 / 1024.0;
+   float power = analogRead(A0) * 4.9 * 1.04 / 1024.0;
    if (power > 4.18) percentage = 100;
    else if (power < 3.0) percentage = 0;
    else percentage = (power - 3.0) * 100 / (4.18-3.0);
@@ -485,4 +509,3 @@ String getMeteoconIcon(String iconText) {
 
   return ")";
 }
-
