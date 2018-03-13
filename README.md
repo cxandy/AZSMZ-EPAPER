@@ -10,8 +10,10 @@ if module is AZSMZ EPaper 2.9":
 if module is AZSMZ EPaper 2.9" Mini:    
 #define AZSMZ_EPAPER_MINI   21  
 
-# where to get
-http://azsmz.aliexpress.com
+## Where to get:
+   http://bancuit.aliexpress.com 
+   http://azsmz.aliexpress.com  
+
 
 # Install Instructions
 https://github.com/cxandy/espaper-weatherstation/wiki/Install-Instructions
