@@ -11,8 +11,8 @@ if module is AZSMZ EPaper 2.9" Mini:
 #define AZSMZ_EPAPER_MINI   21  
 
 ## Where to get:
-   http://bancuit.aliexpress.com 
-   http://azsmz.aliexpress.com  
+   http://bancuit.aliexpress.com     
+   http://azsmz.aliexpress.com      
 
 
 # Install Instructions
