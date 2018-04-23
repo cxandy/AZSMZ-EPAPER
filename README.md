@@ -10,6 +10,11 @@ if module is AZSMZ EPaper 2.9":
 if module is AZSMZ EPaper 2.9" Mini:    
 #define AZSMZ_EPAPER_MINI   21  
 
+## New
+#define DHT11   // settings.h
+The image below For use DHT11:      
+![AZSMZ EPAPER 2.9](resources/DHT11-WIRE.jpg)
+
 ## Where to get:
    http://bancuit.aliexpress.com     
    http://azsmz.aliexpress.com      
