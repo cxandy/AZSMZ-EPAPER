@@ -24,14 +24,15 @@ See more at http://blog.squix.ch
 #define LANG 'EN'
 #include "text.h"
 
-#define AZSMZ_EPAPER_MINI   21  
+//#define AZSMZ_EPAPER_MINI   21  
+//#define DHT11
 
 // Config mode SSID
 const String CONFIG_SSID = "@AZSMZ-ePaper";
 
 // Setup
-String WIFI_SSID = "";
-String WIFI_PASS = "";
+String WIFI_SSID = "TP-LINK_AA0301";
+String WIFI_PASS = "13777060301";
 
 const int UPDATE_INTERVAL_SECS = 20 * 60; // Update every 10 minutes
 
@@ -80,11 +81,11 @@ const int UPDATE_INTERVAL_SECS = 20 * 60; // Update every 10 minutes
 // the city with "pws:STATION_ID". So, for the Aquatic Park in San Francisco you'd use "pws:KCASANFR359".
 // Alternative query options are documented at https://www.wunderground.com/weather/api/d/docs?d=data/index&MR=1#standard_request_url_format
 
-String DISPLAYED_CITY_NAME = "";
-String WUNDERGRROUND_API_KEY = "";
-String WUNDERGRROUND_LANGUAGE = "";
-String WUNDERGROUND_COUNTRY = "";
-String WUNDERGROUND_CITY = "";
+String DISPLAYED_CITY_NAME = "Zürich";
+String WUNDERGRROUND_API_KEY = "7ac907535fc9a1ff";
+String WUNDERGRROUND_LANGUAGE = "EN";
+String WUNDERGROUND_COUNTRY = "CH";
+String WUNDERGROUND_CITY = "Zurich";
 
 #define UTC_OFFSET + 1
 struct dstRule StartRule = {"CEST", Last, Sun, Mar, 2, 3600}; // Central European Summer Time = UTC/GMT +2 hours
