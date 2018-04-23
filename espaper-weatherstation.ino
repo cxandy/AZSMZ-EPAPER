@@ -56,6 +56,18 @@ See more at https://blog.squix.org
 
 #define MAX_FORECASTS 12
 
+#ifdef DHT11
+  #include <SimpleDHT.h>
+  int pinDHT11 = 1;
+  SimpleDHT11 dht11;
+  
+  static byte dht_temp = 0;
+  static byte dht_humi = 0;
+  void getDHT11(){
+      dht11.read(pinDHT11, &dht_temp, &dht_humi, NULL);
+  }
+#endif   
+
 // defines the colors usable in the paletted 16 color frame buffer
 uint16_t palette[] = {ILI9341_BLACK, // 0
                       ILI9341_WHITE, // 1
@@ -262,7 +274,7 @@ void startConfig() {
       WiFi.mode(WIFI_AP);
       WiFi.softAP((ESP.getChipId()+CONFIG_SSID).c_str());
       IPAddress myIP = WiFi.softAPIP();  
-      Serial.println(myIP);
+      Serial.println(myIP.toString());
       gfx.drawString(296 / 2, 10, "AZSMZ ePaper Setup Mode\nConnect WiFi to:\n" + String(ESP.getChipId()) + CONFIG_SSID + "\nOpen browser at\nhttp://" + myIP.toString());
   }
 
@@ -326,8 +338,23 @@ void drawCurrentWeather() {
   if (IS_METRIC) {
     degreeSign = "°C";
   }
+  
   String temp = conditions.currentTemp + degreeSign;    
+
+#ifdef DHT11
+  getDHT11();
+  gfx.setTextAlignment(TEXT_ALIGN_RIGHT); 
+  gfx.setFont(ArialMT_Plain_10);
+  temp = (String)dht_humi + "%";    
+  gfx.drawString(125, 15, temp);  
+
+  gfx.setFont(ArialMT_Plain_24);
+  temp = (String)dht_temp + degreeSign;
+  gfx.drawString(125, 25, temp);
+#else  
   gfx.drawString(55, 25, temp);
+#endif
+
   gfx.setFont(ArialMT_Plain_10);
   gfx.setTextAlignment(TEXT_ALIGN_LEFT);
   gfx.drawString(55, 50, conditions.weatherText);
