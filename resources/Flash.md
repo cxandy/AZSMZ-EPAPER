@@ -6,33 +6,32 @@
 
 ## 2. Download Firmware  ##
 
-   [Firmware 20180118](https://github.com/cxandy/esp8266-weather-station-color/tree/master/resources/AZSMZ_TFT_20180118.bin)      
-   [Firmware 20180130](https://github.com/cxandy/esp8266-weather-station-color/blob/master/resources/AZSMZ-TFT-20180130.bin)
+   [Firmware 20180424](https://github.com/cxandy/espaper-weatherstation/tree/master/resources/EPAPER-20180424.bin)      
    
 ## 3. Start flash new Firmware. ##
   
-  3.1 connect USB of AZSMZ TFT.
+  3.1 connect USB of AZSMZ EPAPER 2.9.
   
   3.2 open esp8266flasher.exe 
   
-   ![open esp8266flasher](/resources/flash-1.jpg)      
+   ![open esp8266flasher](https://github.com/cxandy/esp8266-weather-station-color/tree/master/resources/flash-1.jpg)      
         
   3.3 set "config" please choice your downloaded firmware.    
 
-   ![open esp8266flasher](/resources/flash-2.jpg)      
+   ![open esp8266flasher](https://github.com/cxandy/esp8266-weather-station-color/tree/master/resources/flash-2.jpg)      
         
   3.4 set "Advanced"    
   
-   ![open esp8266flasher](flash-3.jpg)      
+   ![open esp8266flasher](https://github.com/cxandy/esp8266-weather-station-color/tree/masterflash-3.jpg)      
 
   3.5 Start Flash     
   # Note: #
-  1.press "Reset" and "Flash" button of AZSMZ TFT at the same time.        
+  1.press "Reset" and "Flash" button of AZSMZ EPaper 2.9 at the same time.        
   2.release "Reset" button first. release "Flash" button.        
   3.press "Flash" button of ESP8266Flasher.         
   
    ![open esp8266flasher](flash-5.jpg)      
   
   3.5 Reboot
-      press "reset" button of AZSMZ TFT.
+      press "reset" button of AZSMZ EPaper 2.9.
 
