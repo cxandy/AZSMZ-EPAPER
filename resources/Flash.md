@@ -14,7 +14,7 @@
   
   3.2 open esp8266flasher.exe 
   
-   ![open esp8266flasher](https://github.com/cxandy/esp8266-weather-station-color/tree/master/resources/flash-1.jpg)      
+   ![open esp8266flasher](/resources/flash-1.jpg)      
         
   3.3 set "config" please choice your downloaded firmware.    
 
@@ -22,7 +22,7 @@
         
   3.4 set "Advanced"    
   
-   ![open esp8266flasher](https://github.com/cxandy/esp8266-weather-station-color/tree/masterflash-3.jpg)      
+   ![open esp8266flasher](https://github.com/cxandy/esp8266-weather-station-color/tree/master/resources/flash-3.jpg)      
 
   3.5 Start Flash     
   # Note: #
