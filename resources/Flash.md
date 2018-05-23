@@ -22,7 +22,8 @@
         
   3.4 set "Advanced"    
   
-   ![open esp8266flasher](https://github.com/cxandy/esp8266-weather-station-color/tree/master/resources/flash-3.jpg)      
+   ![open esp8266flasher](/resources/AZSMZ-EPAPER-2.9-Mini-weatherstation-20180523.bin)      
+   ![open esp8266flasher](/resources/AZSMZ-EPAPER-2.9-Mini-weatherstation-20180523.bin)      
 
   3.5 Start Flash     
   # Note: #
