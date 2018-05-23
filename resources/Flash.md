@@ -6,8 +6,8 @@
 
 ## 2. Download Firmware  ##
 
-   [Firmware 20180523 For AZSMZ EPAPER 2.9](/resources/AZSMZ-EPAPER-2.9-weatherstation-20180523.bin)
-   [Firmware 20180523 For AZSMZ EPAPER 2.9 Mini](/resources/AZSMZ-EPAPER-2.9-Mini-weatherstation-20180523.bin)
+   [Firmware 20180523 For AZSMZ EPAPER 2.9](/release/AZSMZ-EPAPER-2.9-weatherstation-20180523.bin)       
+   [Firmware 20180523 For AZSMZ EPAPER 2.9 Mini](/release/AZSMZ-EPAPER-2.9-Mini-weatherstation-20180523.bin)
    
 ## 3. Start flash new Firmware. ##
   
