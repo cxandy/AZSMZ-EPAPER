@@ -21,7 +21,7 @@ The image below For use DHT11:
 
 
 # Install Instructions
-https://github.com/cxandy/espaper-weatherstation/wiki/Install-Instructions    
+[Follow me](resources/Install.md)
 
 ## Flash new firmware (so easy) ##
 [Follow me](resources/Flash.md)    
