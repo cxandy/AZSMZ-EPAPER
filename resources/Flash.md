@@ -24,7 +24,6 @@
   3.4 set "Advanced"    
   
    ![open esp8266flasher](/resources/flash-3.jpg)      
-   ![open esp8266flasher](/resources/flash-4.jpg)      
 
   3.5 Start Flash     
   # Note: #
