@@ -15,7 +15,7 @@
 ## Download the code ##
 
 `3.`   Download this project:    
-https://github.com/cxandy/espaper-weatherstation/         
+  https://github.com/cxandy/AZSMZ-EPAPER/         
 `3.1`   Extract it to your sketchbook or other location     
 
 ## Initial Configuration ##
