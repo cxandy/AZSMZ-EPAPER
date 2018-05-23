@@ -6,7 +6,8 @@
 
 ## 2. Download Firmware  ##
 
-   [Firmware 20180424](https://github.com/cxandy/espaper-weatherstation/tree/master/resources/EPAPER-20180424.bin)      
+   [Firmware 20180523 For AZSMZ EPAPER 2.9](/resources/AZSMZ-EPAPER-2.9-weatherstation-20180523.bin)
+   [Firmware 20180523 For AZSMZ EPAPER 2.9 Mini](/resources/AZSMZ-EPAPER-2.9-Mini-weatherstation-20180523.bin)
    
 ## 3. Start flash new Firmware. ##
   
@@ -18,12 +19,12 @@
         
   3.3 set "config" please choice your downloaded firmware.    
 
-   ![open esp8266flasher](https://github.com/cxandy/esp8266-weather-station-color/tree/master/resources/flash-2.jpg)      
+   ![open esp8266flasher](/resources/flash-2.jpg)      
         
   3.4 set "Advanced"    
   
-   ![open esp8266flasher](/resources/AZSMZ-EPAPER-2.9-Mini-weatherstation-20180523.bin)      
-   ![open esp8266flasher](/resources/AZSMZ-EPAPER-2.9-Mini-weatherstation-20180523.bin)      
+   ![open esp8266flasher](/resources/flash-3.jpg)      
+   ![open esp8266flasher](/resources/flash-4.jpg)      
 
   3.5 Start Flash     
   # Note: #
