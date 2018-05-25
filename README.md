@@ -3,7 +3,7 @@
 WeatherStation for the AZSMZ EPaper 2.9" or AZSMZ EPaper 2.9" Mini
 
 ## New Firmware use Yahoo Api
-![AZSMZ EPAPER 2.9](/resources/yahoo-850.jpg)
+![Yahoo Api](resources/yahoo-850.jpg)
 
 Please edit setting.h file
 
