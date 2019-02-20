@@ -1,7 +1,7 @@
 # AZSMZ EPaper 2.9" or AZSMZ EPaper 2.9" Mini
 
 WeatherStation for the AZSMZ EPaper 2.9" or AZSMZ EPaper 2.9" Mini
-
+## [Buy Now](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=ZVZ2RJF8GS2PY)
 ## New Firmware use Yahoo Api
 ![Yahoo Api](resources/yahoo-850.jpg)
 
